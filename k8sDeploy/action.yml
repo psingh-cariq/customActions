@@ -39,4 +39,5 @@ runs:
         run: |
           set -x
           pwd
+          find .
           kubectl apply -f ${{inputs.k8s_code_path}}
