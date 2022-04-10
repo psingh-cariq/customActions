@@ -37,4 +37,6 @@ runs:
       - name: perform k8s deployment
         shell: bash
         run: |
+          set -x
+          pwd
           kubectl apply -f ${{inputs.k8s_code_path}}
