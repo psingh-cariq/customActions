@@ -14,9 +14,6 @@ inputs:
   docker_image_name:
     description: "Docker Image Name"
     required: true
-  docker_image_tag:
-    description: "Image Tag. e.g. Short SHA"
-    required: true
   docker_repo_name:
     description: "Docker Repo Name"
     required: true
@@ -36,10 +33,12 @@ runs:
       - name: Building docker containers
         run: |
           set -x
+          export GITHUB_SHA=${{github.event.pull_request.head.sha}}
+          export SHORT_SHA=${GITHUB_SHA:0:7}
           export REPO_URL="us-docker.pkg.dev"
           export REPO_NAME=${{inputs.docker_repo_name}}
           export IMAGE_NAME=${{inputs.docker_image_name}}
-          export IMAGE_TAG=${{inputs.docker_image_tag}}
+          export IMAGE_TAG=$SHORT_SHA
           export PROJECT_ID=${{inputs.google_project_id}}
 
           export IMAGE1="$IMAGE_NAME:$IMAGE_TAG"
