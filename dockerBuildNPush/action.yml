@@ -14,7 +14,7 @@ inputs:
   docker_image_name:
     description: "Docker Image Name"
     required: true
-  docker_tag:
+  docker_image_tag:
     description: "Image Tag. e.g. Short SHA"
     required: true
   docker_repo_name:
@@ -39,7 +39,7 @@ runs:
           export REPO_URL="us-docker.pkg.dev"
           export REPO_NAME=${{inputs.docker_repo_name}}
           export IMAGE_NAME=${{inputs.docker_image_name}}
-          export IMAGE_TAG=${{inputs.docker_tag}}
+          export IMAGE_TAG=${{inputs.docker_image_tag}}
           export PROJECT_ID=${{inputs.google_project_id}}
 
           export IMAGE1="$IMAGE_NAME:$IMAGE_TAG"
