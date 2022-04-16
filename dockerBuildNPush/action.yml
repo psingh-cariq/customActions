@@ -34,6 +34,7 @@ runs:
         shell: bash
         run: |
           set -x
+          pwd
           export GITHUB_SHA=${{github.event.pull_request.head.sha}}
           export SHORT_SHA=${GITHUB_SHA:0:7}
           export REPO_URL="us-docker.pkg.dev"
