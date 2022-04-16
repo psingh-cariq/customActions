@@ -28,9 +28,11 @@ runs:
           project_id: ${{inputs.google_project_id}}
           service_account_key: ${{inputs.google_credentials}}
       - name: Docker Auth with gCloud CLI
+        shell: bash
         run: |
           gcloud auth configure-docker us-docker.pkg.dev
       - name: Building docker containers
+        shell: bash
         run: |
           set -x
           export GITHUB_SHA=${{github.event.pull_request.head.sha}}
