@@ -21,7 +21,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - uses: actions/checkout@v2
       - name: gcp auth
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
