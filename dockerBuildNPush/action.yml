@@ -47,12 +47,15 @@ runs:
           export IMAGE2="$IMAGE_NAME:latest"
 
           echo "Building docker image $IMAGE_NAME/$SERVICE_NAME"
+          docker images
           
           cd ${{inputs.docker_file_path}}
-          docker build -t "$IMAGE1" -t "IMAGE2" .
+          docker build -t "$IMAGE1" -t "$IMAGE2" .
+          docker images
 
           export IMAGE_FULL_PATH1="$REPO_URL/$PROJECT_ID/$REPO_NAME/${IMAGE1}"
           export IMAGE_FULL_PATH2="$REPO_URL/$PROJECT_ID/$REPO_NAME/${IMAGE2}"
+          docker images
 
           docker tag $IMAGE1 $IMAGE_FULL_PATH1
           docker tag $IMAGE2 $IMAGE_FULL_PATH2
