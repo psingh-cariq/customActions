@@ -34,8 +34,6 @@ runs:
         shell: bash
         run: |
           set -x
-          pwd
-          find platform
           export GITHUB_SHA=${{github.event.pull_request.head.sha}}
           export SHORT_SHA=${GITHUB_SHA:0:7}
           export REPO_URL="us-docker.pkg.dev"
@@ -52,6 +50,7 @@ runs:
           
           cd ${{inputs.docker_file_path}}
           docker build -t "$IMAGE1" -t "$IMAGE2" .
+          cd -
           docker images
 
           export IMAGE_FULL_PATH1="$REPO_URL/$PROJECT_ID/$REPO_NAME/${IMAGE1}"
