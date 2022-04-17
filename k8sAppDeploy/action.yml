@@ -36,7 +36,7 @@ runs:
           CQ_APP_PORT: ${{inputs.CQ_APP_PORT}}
         with:
           input: k8s/app.yaml.tmpl
-          output: /tmp/app.yaml
+          output: ~/app.yaml
       - name: Configure for K8s cluster
         shell: bash
         run: |
@@ -49,6 +49,6 @@ runs:
         shell: bash
         run: |
           set -x
-          ls -lrt /tmp/app.yaml
-          cat /tmp/app.yaml
-          kubectl apply -f /tmp/app.yaml
+          ls -lrt ~/app.yaml
+          cat ~/app.yaml
+          kubectl apply -f ~/app.yaml
