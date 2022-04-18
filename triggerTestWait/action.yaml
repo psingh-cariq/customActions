@@ -20,7 +20,7 @@ inputs:
   group:
     required: true
     description: name of the test group for which test will be triggered
-  dockerRepo:
+  env:
     required: true
     description: target test env
 
