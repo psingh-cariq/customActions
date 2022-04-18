@@ -1,0 +1,25 @@
+name: Trigger Deploy and wait
+description: This action trigger deployment
+inputs:
+  app:
+    required: true
+    description: Application name to validate
+  gitSha:
+    required: true
+    description: git sha which should be validated
+  maxAttempt:
+    required: false
+    default: 15
+    description: target test env
+  sleepTime:
+    required: false
+    default: 10
+    description: target test env
+
+runs:
+  using: docker
+  image: 'Dockerfile'
+
+branding:
+  icon: arrow-down
+  color: blue
