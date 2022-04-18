@@ -1,5 +1,5 @@
-name: Trigger Build and wait
-description: This action trigger build with parameters and waits
+name: Trigger Deploy and wait
+description: This action trigger deployment
 inputs:
   user:
     required: true
@@ -17,10 +17,10 @@ inputs:
     required: false
     default: 'main'
     description: Branch from where to trigger test
-  group:
+  gitSha:
     required: true
-    description: name of the test group for which test will be triggered
-  dockerRepo:
+    description: git sha which should be deployed
+  env:
     required: true
     description: target test env
 
