@@ -20,7 +20,7 @@ inputs:
   gitSha:
     required: true
     description: git sha which should be deployed
-  env:
+  cariqDockerRepo:
     required: true
     description: target test env
 

@@ -11,16 +11,16 @@ token = os.environ['INPUT_TOKEN']
 user = os.environ['INPUT_USER']
 repo = os.environ['INPUT_REPO']
 workflow = os.environ['INPUT_WORKFLOW']
-git_sha = os.environ['INPUT_GITSHA']
+gitSha = os.environ['INPUT_GITSHA']
 branch = os.environ['INPUT_BRANCH']
-docker_repo = os.environ['INPUT_DOCKER_REPO']
+cariqDockerRepo = os.environ['INPUT_CARIQ_DOCKER_REPO']
 wait_max_attempt = 60
 url_trigger = "https://api.github.com/repos/{0}/{1}/actions/workflows/{2}.yaml/dispatches".format(user, repo, workflow)
 payload = json.dumps({
     "ref": "{0}".format(branch),
     "inputs": {
-        "gitSha": "{0}".format(git_sha),
-        "cariq-docker-repo": "{0}".format(docker_repo),
+        "gitSha": "{0}".format(gitSha),
+        "cariq-docker-repo": "{0}".format(cariqDockerRepo),
     }
 })
 headers = {
