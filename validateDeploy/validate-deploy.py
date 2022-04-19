@@ -12,17 +12,17 @@ expectedSha = os.environ['INPUT_GITSHA']
 maxAttempt = os.environ['INPUT_MAXATTEMPT']
 sleepDuration = os.environ['INPUT_SLEEPDURATION']
 counter = 1
-max_attempt = 3
+
 logging.info(f"App: {app}")
 logging.info(f"Expected Sha: {expectedSha}")
-expectedSha
+
 
 json_path1 = "{.items[?(@.metadata.labels.app=='%s')].status}" % app
 command2 = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path1)
 result = envoy.run(command2)
 logging.info(result.std_out)
 
-while counter <= max_attempt:
+while counter <= int(maxAttempt):
     logging.info(f"Validate sha {expectedSha} for app {app} attempt {counter}")
     json_path = "{.items[?(@.metadata.labels.app=='%s')].status.containerStatuses[0].image}" % app
     command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
@@ -49,6 +49,7 @@ while counter <= max_attempt:
             logging.error(f"Failed to extract sha from image name: {image}")
     if matchCount == candidatesCount:
         logging.info(f"All images are matched with expected sha {expectedSha} for app {app} validated total of {candidatesCount}")
+        break
     else:
         errorMessage = f"{matchCount} matched against {candidatesCount} candidates"
         assert False, errorMessage
