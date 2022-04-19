@@ -13,6 +13,9 @@ maxAttempt = os.environ['INPUT_MAXATTEMPT']
 sleepDuration = os.environ['INPUT_SLEEPDURATION']
 counter = 1
 max_attempt = 3
+logging.info(f"App: {app}")
+logging.info(f"Expected Sha: {expectedSha}")
+expectedSha
 
 
 while counter <= max_attempt:
@@ -20,7 +23,9 @@ while counter <= max_attempt:
     json_path = "{.items[?(@.metadata.labels.app=='%s')].status.containerStatuses[0].image}" % app
     command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
     r = envoy.run(command)
+    logging.info(r.std_out)
     list_of_images = r.std_out.split(",")
+    logging.info(r)
     if len(list_of_images) < 1:
         logging.warning(f"No images found for app: {app}")
         break
