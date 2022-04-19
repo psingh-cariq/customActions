@@ -5,3 +5,4 @@ idna==2.9
 PyGithub==1.51
 urllib3==1.25.9
 wrapt==1.12.1
+envoy==0.0.3
