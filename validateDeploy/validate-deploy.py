@@ -49,6 +49,8 @@ while counter <= max_attempt:
             logging.error(f"Failed to extract sha from image name: {image}")
     if matchCount == candidatesCount:
         logging.info(f"All images are matched with expected sha {expectedSha} for app {app} validated total of {candidatesCount}")
-        break
+    else:
+        errorMessage = f"{matchCount} matched against {candidatesCount} candidates"
+        assert False, errorMessage
     time.sleep(int(sleepDuration))
     counter += 1
