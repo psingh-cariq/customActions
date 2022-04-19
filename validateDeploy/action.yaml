@@ -10,11 +10,11 @@ inputs:
   maxAttempt:
     required: false
     default: 15
-    description: target test env
-  sleepTime:
+    description: how many times to perform check
+  sleepDuration:
     required: false
     default: 10
-    description: target test env
+    description: how long to pause between attempts
 
 runs:
   using: docker

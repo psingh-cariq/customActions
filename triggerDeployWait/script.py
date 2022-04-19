@@ -13,14 +13,14 @@ repo = os.environ['INPUT_REPO']
 workflow = os.environ['INPUT_WORKFLOW']
 gitSha = os.environ['INPUT_GITSHA']
 branch = os.environ['INPUT_BRANCH']
-cariqDockerRepo = os.environ['INPUT_CARIQDOCKERREPO']
+cariqDockerRepo = os.environ['INPUT_DOCKERREPO']
 wait_max_attempt = 60
 url_trigger = "https://api.github.com/repos/{0}/{1}/actions/workflows/{2}.yaml/dispatches".format(user, repo, workflow)
 payload = json.dumps({
     "ref": "{0}".format(branch),
     "inputs": {
         "gitSha": "{0}".format(gitSha),
-        "cariq-docker-repo": "{0}".format(cariqDockerRepo),
+        "gitRepo": "{0}".format(cariqDockerRepo),
     }
 })
 headers = {

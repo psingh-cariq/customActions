@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 app = os.environ['INPUT_APP']
 expectedSha = os.environ['INPUT_GITSHA']
 maxAttempt = os.environ['INPUT_MAXATTEMPT']
-sleetTime = os.environ['INPUT_SLEEPTIME']
+sleepDuration = os.environ['INPUT_SLEEPDURATION']
 counter = 1
 max_attempt = 3
 
@@ -38,5 +38,5 @@ while counter <= max_attempt:
     if matchCount == candidatesCount:
         logging.info(f"All images are matched with expected sha {expectedSha} for app {app} validated total of {candidatesCount}")
         break
-    time.sleep(sleetTime)
+    time.sleep(int(sleepDuration))
     counter += 1
