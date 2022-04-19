@@ -27,7 +27,8 @@ pprint(result.std_out)
 while counter <= int(maxAttempt):
     logging.info(f"Validate sha {expectedSha} for app {app} attempt {counter}")
     json_path = "{.items[?(@.metadata.labels.app=='%s')].status.containerStatuses[0].image}" % app
-    command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
+    # command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
+    command = 'kubectl get pods -o json'
     print(f"command == {command}")
     r = envoy.run(command)
     print(f"Line 32 {r.std_out}")
