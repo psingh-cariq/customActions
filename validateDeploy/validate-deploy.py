@@ -34,7 +34,14 @@ while counter <= max_attempt:
     logging.info("Found {0} images for app {1} to validate".format(candidatesCount, app))
     for image in list_of_images:
         logging.info(f"Image name before split: {image}")
-        actualSha = image.split(":")[1].split(" ")[0]
+        try:
+            actualSha = image.split(":")[1].split(" ")[0]
+        except:
+            logging.error(f"Failed to extract sha from image name: {image}")
+            json_path1 = "{.items[?(@.metadata.labels.app=='%s')].status}" % app
+            command2 = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
+            r = envoy.run(command2)
+            logging.info(r.std_out)
         if expectedSha == actualSha:
             logging.info(
                 "Actual Sha:{0} and Expected Sha:{1} are matched for app {2}".format(actualSha, expectedSha, app))
