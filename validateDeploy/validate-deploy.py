@@ -25,7 +25,7 @@ while counter <= max_attempt:
     r = envoy.run(command)
     logging.info(r.std_out)
     list_of_images = r.std_out.split(",")
-    logging.info(r)
+    logging.info(r.std_out)
     if len(list_of_images) < 1:
         logging.warning(f"No images found for app: {app}")
         break
