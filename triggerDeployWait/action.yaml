@@ -20,9 +20,9 @@ inputs:
   gitSha:
     required: true
     description: git sha which should be deployed
-  dockerRepo:
+  gitRepo:
     required: true
-    description: docker repo name
+    description: docker repo name in gcp
 
 runs:
   using: docker

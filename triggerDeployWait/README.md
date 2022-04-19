@@ -24,6 +24,6 @@
     repo: repo name
     workflow: name of the yaml file 
     branch: brancNamedocker_repo
-    cariqDockerRepo: name of your doker repository
+    gitRepo: name of your doker repository
     gitSha: gitsha to be deployed
 ```
