@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import os
 import time
+from pprint import pprint
+
 import envoy
 import logging
 
@@ -20,7 +22,7 @@ logging.info(f"Expected Sha: {expectedSha}")
 json_path1 = "{.items[?(@.metadata.labels.app=='%s')].status}" % app
 command2 = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path1)
 result = envoy.run(command2)
-logging.info(result.std_out)
+pprint(result.std_out)
 
 while counter <= int(maxAttempt):
     logging.info(f"Validate sha {expectedSha} for app {app} attempt {counter}")
