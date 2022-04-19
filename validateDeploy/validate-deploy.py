@@ -28,8 +28,9 @@ while counter <= int(maxAttempt):
     logging.info(f"Validate sha {expectedSha} for app {app} attempt {counter}")
     json_path = "{.items[?(@.metadata.labels.app=='%s')].status.containerStatuses[0].image}" % app
     command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
+    print(f"command == {command}")
     r = envoy.run(command)
-    print(r.std_out)
+    print(f"Line 32 {r.std_out}")
     list_of_images = r.std_out.split(",")
     if len(list_of_images) < 1:
         logging.warning(f"No images found for app: {app}")
