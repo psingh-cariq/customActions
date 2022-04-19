@@ -33,6 +33,7 @@ while counter <= max_attempt:
     matchCount: int = 0
     logging.info("Found {0} images for app {1} to validate".format(candidatesCount, app))
     for image in list_of_images:
+        logging.info(f"Image name before split: {image}")
         actualSha = image.split(":")[1].split(" ")[0]
         if expectedSha == actualSha:
             logging.info(
