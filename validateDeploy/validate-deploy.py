@@ -27,9 +27,8 @@ while counter <= int(maxAttempt):
     json_path = "{.items[?(@.metadata.labels.app=='%s')].status.containerStatuses[0].image}" % app
     command = 'kubectl get pods -o=jsonpath="{0}"'.format(json_path)
     r = envoy.run(command)
-    logging.info(r.std_out)
+    print(r.std_out)
     list_of_images = r.std_out.split(",")
-    logging.info(r.std_out)
     if len(list_of_images) < 1:
         logging.warning(f"No images found for app: {app}")
         break
@@ -41,14 +40,14 @@ while counter <= int(maxAttempt):
         try:
             actualSha = image.split(":")[1].split(" ")[0]
             if expectedSha == actualSha:
-                logging.info("Actual Sha:{0} and Expected Sha:{1} are matched for app {2}".format(actualSha, expectedSha, app))
+                print("Actual Sha:{0} and Expected Sha:{1} are matched for app {2}".format(actualSha, expectedSha, app))
                 matchCount += 1
             else:
-                logging.warning("Actual Sha:{0} and Expected Sha:{1} are not matched".format(actualSha, expectedSha))
+                print("Actual Sha:{0} and Expected Sha:{1} are not matched".format(actualSha, expectedSha))
         except:
             logging.error(f"Failed to extract sha from image name: {image}")
     if matchCount == candidatesCount:
-        logging.info(f"All images are matched with expected sha {expectedSha} for app {app} validated total of {candidatesCount}")
+        print(f"All images are matched with expected sha {expectedSha} for app {app} validated total of {candidatesCount}")
         break
     else:
         errorMessage = f"{matchCount} matched against {candidatesCount} candidates"
