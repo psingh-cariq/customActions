@@ -12,7 +12,7 @@ user = os.environ['INPUT_USER']
 repo = os.environ['INPUT_REPO']
 workflow = os.environ['INPUT_WORKFLOW']
 env = os.environ['INPUT_ENV']
-group = os.environ['INPUT_GROUP']
+test_file = os.environ['INPUT_TESTFILE']
 branch = os.environ['INPUT_BRANCH']
 wait_max_attempt = 60
 url_trigger = "https://api.github.com/repos/{0}/{1}/actions/workflows/{2}.yaml/dispatches".format(user, repo, workflow)
@@ -20,7 +20,7 @@ payload = json.dumps({
     "ref": "{0}".format(branch),
     "inputs": {
         "target-env": "{0}".format(env),
-        "test-group": "{0}".format(group),
+        "test-file": "{0}".format(test_file),
     }
 })
 headers = {
