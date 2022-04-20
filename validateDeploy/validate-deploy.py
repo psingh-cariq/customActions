@@ -21,10 +21,12 @@ logging.info(f"Expected Sha: {expectedSha}")
 
 
 actual_json = json.loads(subprocess.check_output("kubectl get pods -o json", shell=True))
+logging.info(actual_json)
 for item in actual_json['items']:
     if item['metadata']['labels']['app'] == app:
-        image = item['status']['containerStatuses'][0]['image']
-        print(image)
+        for status in item['status']['containerStatuses']:
+            var = status['image']
+            print(var)
 #
 # actual_json['items'][0]['metadata']['labels']['app']
 # json_path1 = "{.items[?(@.metadata.labels.app=='%s')].status}" % app

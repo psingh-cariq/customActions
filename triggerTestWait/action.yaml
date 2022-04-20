@@ -17,9 +17,9 @@ inputs:
     required: false
     default: 'main'
     description: Branch from where to trigger test
-  group:
+  testFile:
     required: true
-    description: name of the test group for which test will be triggered
+    description: name of the test group file name for which holds test triggering params
   env:
     required: true
     description: target test env

@@ -11,8 +11,8 @@
 **Required** - Name of workflow file without extension
 ### branch
 **Required** - branch name where build should be triggered, main is default value
-### group
-**Required** - Test group which needs to be triggered
+### testFile
+**Required** - Name of the test file which needs to be triggered
 ### env
 **Required** - Target test env such as dev,int,staging, whatever
 
@@ -26,6 +26,6 @@
     repo: actions-play
     workflow: pr_build
     branch: main
-    group: smoke
+    testFile: name of the file
     env: test
 ```
