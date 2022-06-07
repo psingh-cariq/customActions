@@ -45,7 +45,7 @@ runs:
           export IMAGE1="$IMAGE_NAME:$IMAGE_TAG"
           export IMAGE2="$IMAGE_NAME:latest"
 
-          echo "Building docker image $IMAGE_NAME/$SERVICE_NAME"
+          echo "Building docker image $IMAGE1 and $IMAGE2"
           docker images
           
           cd ${{inputs.docker_file_path}}
