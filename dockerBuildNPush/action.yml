@@ -34,7 +34,11 @@ runs:
         shell: bash
         run: |
           set -x
-          export GITHUB_SHA=${{github.event.pull_request.head.sha}}
+          # GITHUB_HEAD_REF is set only for PRs
+          if [[ -n $GITHUB_HEAD_REF ]]; then
+            GITHUB_SHA=${{github.event.pull_request.head.sha}}
+          fi
+          echo "GITHUB_SHA=$GITHUB_SHA"
           export SHORT_SHA=${GITHUB_SHA:0:7}
           export REPO_URL="us-docker.pkg.dev"
           export REPO_NAME=${{inputs.docker_repo_name}}
