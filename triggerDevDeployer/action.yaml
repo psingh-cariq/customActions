@@ -1,0 +1,20 @@
+name: Trigger Deploy and wait
+description: This action trigger deployment on dev
+inputs:
+  auth-token:
+    required: true
+    description: Github Auth Token
+  repo-name:
+    required: true
+    description: GitHub Repo Name
+  git-sha:
+    required: true
+    description: GitHub Sha
+
+runs:
+  using: docker
+  image: 'Dockerfile'
+
+branding:
+  icon: arrow-down
+  color: blue
