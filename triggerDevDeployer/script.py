@@ -26,7 +26,8 @@ def trigger_workflow(auth_token, git_sha, repo_name):
 def main():
     auth_token = os.environ['INPUT_AUTH_TOKEN']
     repo_name = os.environ['INPUT_REPO_NAME']
-    auth_token = os.environ['INPUT_GIT_SHA']
+    git_sha = os.environ['INPUT_GIT_SHA']
+    trigger_workflow(auth_token, git_sha, repo_name )
 
 
 if __name__ == '__main__':

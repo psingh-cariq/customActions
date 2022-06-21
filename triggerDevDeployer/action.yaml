@@ -1,5 +1,5 @@
 name: Trigger Deploy and wait
-description: This action trigger deployment
+description: This action trigger deployment on dev
 inputs:
   auth-token:
     required: true
