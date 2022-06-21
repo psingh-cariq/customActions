@@ -1,0 +1,25 @@
+name: Manual Test Suite Selection
+
+on:
+  workflow_dispatch:
+    inputs:
+      gitSha:
+        description: 'Git Sha to deploy'
+        required: true
+        default: '1234567'
+
+env:
+  GIT_SHA: ${{ github.event.inputs.target-env }}
+
+
+jobs:
+  execute-smoke-test:
+    name: trigger devDeployer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Application
+        uses: psingh-cariq/customActions/triggerDevDeployer@trigger/wait
+        with:
+         token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
+         gitSha: ${{ steps.get-sha.outputs.sha }}
+         gitRepo: ${{env.REPO_NAME}}
