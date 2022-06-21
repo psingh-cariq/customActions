@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Application
-        uses: psingh-cariq/customActions/triggerDevDeployer@trigger/wait
+        uses: psingh-cariq/customActions/triggerDevDeployer@main
         with:
          token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
          gitSha: ${{ steps.get-sha.outputs.sha }}
