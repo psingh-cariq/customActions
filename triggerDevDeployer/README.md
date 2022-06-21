@@ -15,5 +15,5 @@
   with:
     token: ${{secrets.GH_AUTH_TOKEN}}
     repo: repo name
-    gitSha: gitsha to be deployed
+    gitSha: git sha to be deployed
 ```
