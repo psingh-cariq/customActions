@@ -8,6 +8,7 @@ runs:
       - uses: mikefarah/yq@master
       - name: find applications
         id: set-matrix
+        shell: bash
         run: |
              set -x
              which yq
