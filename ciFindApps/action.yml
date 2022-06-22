@@ -7,7 +7,6 @@ runs:
       - uses: actions/checkout@v2
       - uses: mikefarah/yq@master
       - name: find applications
-        id: set-matrix
         shell: bash
         run: |
              set -x
@@ -16,5 +15,5 @@ runs:
              cat applications.json
              matrix=$(jq -r '.[].name' applications.json | sed -e 's/\(.*\)/"\1"/g' | tr  '\n' ','| sed 's/,$//')
              echo "[$matrix]"
-             echo "::set-output name=matrix::$(echo "[$matrix]" )"
+             echo "REPO_APPS=$matrix" >> $GITHUB_ENV
 
