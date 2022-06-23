@@ -1,13 +1,13 @@
 name: Trigger Deploy and wait
 description: This action trigger deployment on dev
 inputs:
-  auth-token:
+  token:
     required: true
     description: Github Auth Token
-  repo-name:
+  repoName:
     required: true
     description: GitHub Repo Name
-  git-sha:
+  gitSha:
     required: true
     description: GitHub Sha
 

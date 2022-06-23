@@ -1,8 +1,12 @@
-name: Manual Test Suite Selection
+name: test triggerDevDeployer
 
 on:
   workflow_dispatch:
     inputs:
+      repoName:
+        description: 'Repo name'
+        required: true
+        default: 'my repo name'
       gitSha:
         description: 'Git Sha to deploy'
         required: true
@@ -18,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Application
-        uses: psingh-cariq/customActions/triggerDevDeployer@main
+        uses: gocariq/devops/customActions/triggerDevDeployer@main
         with:
          token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
-         gitSha: ${{ steps.get-sha.outputs.sha }}
-         gitRepo: ${{env.REPO_NAME}}
+         gitSha: ${{ github.event.inputs.gitSha }}
+         repoName: ${{ github.event.inputs.repoName }}

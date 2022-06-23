@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import json
 import os
-
 import requests
 
 
@@ -20,13 +19,13 @@ def trigger_workflow(auth_token, git_sha, repo_name):
         'Authorization': 'Bearer {}'.format(auth_token)
     }
     response = requests.request("POST", dispatch_url, headers=headers, data=payload)
-    assert response.status_code == 204
+    assert response.status_code == 204, "Failed to trigger workflow\n Response code {}\n Error: {}".format(response.status_code, response.json())
 
 
 def main():
-    auth_token = os.environ['INPUT_AUTH_TOKEN']
-    repo_name = os.environ['INPUT_REPO_NAME']
-    git_sha = os.environ['INPUT_GIT_SHA']
+    auth_token = os.environ['INPUT_TOKEN']
+    repo_name = os.environ['INPUT_REPONAME']
+    git_sha = os.environ['INPUT_GITSHA']
     trigger_workflow(auth_token, git_sha, repo_name )
 
 

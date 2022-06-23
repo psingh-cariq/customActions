@@ -13,7 +13,7 @@
 - uses: psingh-cariq/customActions/triggerDevDeployer@main
   name: Trigger deploy to dev env
   with:
-    token: ${{secrets.GH_AUTH_TOKEN}}
-    repo: repo name
+    token: yourToken
+    repoName: repo name
     gitSha: git sha to be deployed
 ```
