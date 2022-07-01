@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Application
-        uses: gocariq/devops/customActions/triggerDeployer@main
+        uses: psingh/customActions/triggerDeployer@main
         with:
          token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
          gitSha: ${{ github.event.inputs.gitSha }}
