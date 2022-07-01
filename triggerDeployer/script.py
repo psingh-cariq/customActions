@@ -26,7 +26,7 @@ def main():
     auth_token = os.environ['INPUT_TOKEN']
     repo_name = os.environ['INPUT_REPONAME']
     git_sha = os.environ['INPUT_GITSHA']
-    deployer_name = os.environ['INPUT_DEPLOYER']
+    deployer_name = os.environ['INPUT_DEPLOYERNAME']
     trigger_workflow(auth_token, git_sha, repo_name, deployer_name)
 
 
