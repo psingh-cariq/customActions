@@ -1,4 +1,4 @@
-name: test triggerDevDeployer
+name: test triggerDeployer
 
 on:
   workflow_dispatch:
@@ -11,6 +11,10 @@ on:
         description: 'Git Sha to deploy'
         required: true
         default: '1234567'
+      deployerName:
+        description: "name of the yaml workflow file"
+        required: true
+        default: 'dev-pci'
 
 env:
   GIT_SHA: ${{ github.event.inputs.target-env }}
@@ -22,8 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Application
-        uses: gocariq/devops/customActions/triggerDevDeployer@main
+        uses: gocariq/devops/customActions/triggerDeployer@main
         with:
          token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
          gitSha: ${{ github.event.inputs.gitSha }}
          repoName: ${{ github.event.inputs.repoName }}
+         deployerName: ${{ github.event.inputs.deployerName }}
