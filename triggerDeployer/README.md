@@ -10,7 +10,7 @@
 
 ## Usages
 ```yaml
-- uses: psingh-cariq/customActions/triggerDevDeployer@main
+- uses: psingh-cariq/customActions/triggerDeployer@main
   name: Trigger deploy to dev env
   with:
     token: yourToken
