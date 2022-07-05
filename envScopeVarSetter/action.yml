@@ -26,7 +26,7 @@ runs:
             out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
             projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
           else
-            projectId="$ENV_NAME_KEY-$ENV_SCOPE_KEY"
+            projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
           fi
           echo "Project Id: $projectId"
           ENV_SCOPE['project_id']=$projectId
