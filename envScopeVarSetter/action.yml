@@ -1,0 +1,39 @@
+name: "Env and Scope Var Setter"
+description: "Sets secrets bases on env and scope"
+
+inputs:
+      envName:
+        description: 'Environment name'
+        required: true
+      envScope:
+        description: 'Environment scope'
+        required: true
+
+runs:
+  using: "composite"
+  steps:
+      - name: Set secrets as env var
+        shell: bash
+        run: |
+          declare -A envScope
+          envNameKey = ${{ inputs.envName }}
+          envScopeKey = ${{ inputs.envScope }}
+          envScopeKeys = $envNameKey$envScopeKey
+          projectId = ""
+          
+          if [[ $envScopeKey == NON* ]]
+          then
+              out=$(echo $envScopeKey | sed 's/./&-/3')
+              $projectId = "$envNameKey-$out"
+          else
+	          $projectId = "$envNameKey-$envScopeKey"
+          fi
+          echo "Project Id: $projectId"
+          
+          envScope['project_id']=$projectId
+	      envScope['k8s_sa']="secret.GCP_SA_GHA_${envScopeKeys^^}_DEPLOYMENT"
+	      envScope['tf_sa']="secret.GCP_SA_GHA_${envScopeKeys^^}_TERRAFORM}"
+      
+          export GCP_PROJECT_ID=${envScope['project_id']}
+          export K8S_SA=${envScope['k8s_sa']}
+          export TF_SA=${envScope['tf_sa']}

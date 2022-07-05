@@ -1,0 +1,30 @@
+name: test triggerDeployer
+
+on:
+  workflow_dispatch:
+    inputs:
+      envName:
+        description: 'env name'
+        required: true
+        default: 'dev'
+      envScope:
+        description: 'Scope of env pci or nonpci'
+        required: true
+        default: 'devpci'
+      branch:
+        description: 'Branch name'
+        required: true
+        default: main
+
+
+jobs:
+  execute-smoke-test:
+    name: trigger devDeployer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set env variables
+        uses: psingh/customActions/envScopeVarSetter@${{inputs.branch}}
+        with:
+         envName: ${{inputs.envName }}
+         envScope: ${{inputs.envScope }}
+         branch: ${{ inputs.repoName }}
