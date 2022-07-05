@@ -1,4 +1,4 @@
-name: test triggerDeployer
+name: test envScopeVarSetter
 
 on:
   workflow_dispatch:
