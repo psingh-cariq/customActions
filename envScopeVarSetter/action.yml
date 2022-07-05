@@ -15,12 +15,13 @@ runs:
       - name: Set secrets as env var
         shell: bash
         run: |
+          bash --version
           set -x
           declare -A ENV_SCOPE
           ENV_NAME_KEY=${{ github.event.inputs.envName }}
           ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
           ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
-          if [[ $ENV_SCOPE_KEY == "NON*" ]]
+          if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
           then
             out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
             projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
