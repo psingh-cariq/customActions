@@ -16,8 +16,8 @@ runs:
         shell: bash
         run: |
           declare -A envScope
-          envNameKey = ${{ inputs.envName }}
-          envScopeKey = ${{ inputs.envScope }}
+          envNameKey = ${{ github.event.inputs.envName }}
+          envScopeKey = ${{ github.event.inputs.envScope }}
           envScopeKeys = $envNameKey$envScopeKey
           projectId = ""
           
