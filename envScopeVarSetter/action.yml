@@ -29,9 +29,9 @@ runs:
             projectId="$ENV_NAME_KEY-$ENV_SCOPE_KEY"
           fi
           echo "Project Id: $projectId"
-          envScope['project_id']=$projectId
-          envScope['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
-          envScope['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_TERRAFORM"
+          ENV_SCOPE['project_id']=$projectId
+          ENV_SCOPE['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
+          ENV_SCOPE['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_TERRAFORM"
 
           export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
           export K8S_SA=${ENV_SCOPE['k8s_sa']}
