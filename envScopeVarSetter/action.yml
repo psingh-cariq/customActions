@@ -22,15 +22,15 @@ runs:
           ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
           if [[ $ENV_SCOPE_KEY == "NON*" ]]
           then
-            out=$(echo ENV_SCOPE_KEY | sed 's/./&-/3')
-            projectId="${ENV_NAME_KEY,,}-${out,,}"
+            out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
+            projectId=echo(${ENV_NAME_KEY,,}-${out,,}
           else
-            projectId="ENV_NAME_KEY-ENV_SCOPE_KEY"
+            projectId="$ENV_NAME_KEY-$ENV_SCOPE_KEY"
           fi
           echo "Project Id: $projectId"
           envScope['project_id']=$projectId
-          envScope['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEY^^}_DEPLOYMENT"
-          envScope['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEY^^}_TERRAFORM"
+          envScope['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
+          envScope['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_TERRAFORM"
 
           export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
           export K8S_SA=${ENV_SCOPE['k8s_sa']}
