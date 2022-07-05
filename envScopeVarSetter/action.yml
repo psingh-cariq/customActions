@@ -37,3 +37,4 @@ runs:
           export GCP_PROJECT_ID=${envScope['project_id']}
           export K8S_SA=${envScope['k8s_sa']}
           export TF_SA=${envScope['tf_sa']}
+          echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
