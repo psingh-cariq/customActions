@@ -16,23 +16,23 @@ runs:
         shell: bash
         run: |
           set -x
-          declare -A envScope
-          envNameKey = ${{ github.event.inputs.envName }}
-          envScopeKey = ${{ github.event.inputs.envScope }}
-          envScopeKeys=$envNameKey$envScopeKey
-          if [[ $envScopeKey == NON* ]]
+          declare -A ENV_SCOPE
+          ENV_NAME_KEY = ${{ github.event.inputs.envName }}
+          ENV_SCOPE_KEY = ${{ github.event.inputs.envScope }}
+          ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
+          if [[ $ENV_SCOPE_KEY == "NON*" ]]
           then
-            out=$(echo $envScopeKey | sed 's/./&-/3')
-            projectId="${envNameKey,,}-${out,,}"
+            out=$(echo ENV_SCOPE_KEY | sed 's/./&-/3')
+            projectId="${ENV_NAME_KEY,,}-${out,,}"
           else
-            projectId="$envNameKey-$envScopeKey"
+            projectId="ENV_NAME_KEY-ENV_SCOPE_KEY"
           fi
           echo "Project Id: $projectId"
           envScope['project_id']=$projectId
-          envScope['k8s_sa']="secret.GCP_SA_GHA_${envScopeKeys^^}_DEPLOYMENT"
-          envScope['tf_sa']="secret.GCP_SA_GHA_${envScopeKeys^^}_TERRAFORM"
+          envScope['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEY^^}_DEPLOYMENT"
+          envScope['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEY^^}_TERRAFORM"
 
-          export GCP_PROJECT_ID=${envScope['project_id']}
-          export K8S_SA=${envScope['k8s_sa']}
-          export TF_SA=${envScope['tf_sa']}
+          export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
+          export K8S_SA=${ENV_SCOPE['k8s_sa']}
+          export TF_SA=${ENV_SCOPE['tf_sa']}
           echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
