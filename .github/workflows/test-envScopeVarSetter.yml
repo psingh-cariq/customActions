@@ -10,7 +10,7 @@ on:
       envScope:
         description: 'Scope of env pci or nonpci'
         required: true
-        default: 'devpci'
+        default: 'nonpci'
       branch:
         description: 'Branch name'
         required: true
@@ -27,4 +27,4 @@ jobs:
         with:
          envName: ${{inputs.envName }}
          envScope: ${{inputs.envScope }}
-         branch: ${{ inputs.repoName }}
+         branch: ${{ inputs.branch }}
