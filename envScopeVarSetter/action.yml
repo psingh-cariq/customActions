@@ -15,7 +15,6 @@ runs:
       - name: Set secrets as env var
         shell: bash
         run: |
-          bash --version
           set -x
           declare -A ENV_SCOPE
           ENV_NAME_KEY=${{ github.event.inputs.envName }}

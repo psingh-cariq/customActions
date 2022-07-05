@@ -15,7 +15,7 @@ on:
 
 jobs:
   execute-smoke-test:
-    name: trigger devDeployer
+    name: trigger envScopeSetter
     runs-on: ubuntu-latest
     steps:
       - name: Set env variables
