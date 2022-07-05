@@ -23,8 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set env variables
-        uses: psingh/customActions/envScopeVarSetter@${{inputs.branch}}
+        uses: psingh/customActions/envScopeVarSetter@${{github.event.inputs.branch}}
         with:
-         envName: ${{inputs.envName }}
-         envScope: ${{inputs.envScope }}
-         branch: ${{ inputs.branch }}
+         envName: ${{ github.event.inputs.envName }}
+         envScope: ${{github.event.inputs.envScope }}
