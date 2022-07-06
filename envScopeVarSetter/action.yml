@@ -37,7 +37,7 @@ runs:
           export TF_SA=${ENV_SCOPE['tf_sa']}
           echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
           
-          case ${ENV_SCOPE_KEY^^} in
+          case ${ENV_SCOPE_KEYS^^} in
           "PLAYPCI")
           echo "switch PLAYPCI"
           ;;
