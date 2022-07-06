@@ -36,3 +36,33 @@ runs:
           export K8S_SA=${ENV_SCOPE['k8s_sa']}
           export TF_SA=${ENV_SCOPE['tf_sa']}
           echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
+          
+          case ${ENV_SCOPE_KEY^^} in
+          "PLAYPCI")
+          echo "switch PLAYPCI"
+          ;;
+          "PLAYNONPCI")
+          echo "switch PLAYNONPCI"
+          ;;
+          "DEVPCI")
+          echo "switch DEVPCI"
+          ;;
+          "DEVNONEPCI")
+          echo "switch DEVNONEPCI"
+          ;;
+          "INTGPCI")
+          echo "switch INTGPCI"
+          ;;
+          "INTGNONPCI")
+          echo "switch INTGNONPCI"
+          ;;
+          "STAGINGPCI")
+          echo "switch STAGINGPCI"
+          ;;
+          "STAGINGNONPCI")
+          echo "switch STAGINGNONPCI"
+          ;;
+          *)
+          echo "No matching information found"
+          ;;
+          esac
