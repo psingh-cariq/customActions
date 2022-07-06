@@ -36,9 +36,9 @@ runs:
 
                       ENV_SCOPE['project_id']=$PROJECT_ID
                       SECRET_K8S_SA="secret.GCP_SA_GHA_$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')_DEPLOYMENT"
-                      ENV_SCOPE['k8s_sa']=${{SECRET_K8S_SA}}
+                      ENV_SCOPE['k8s_sa']=${{$SECRET_K8S_SA}}
                       SECRET_TF_SA="secret.GCP_SA_GHA_$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')_TERRAFORM"
-                      ENV_SCOPE['tf_sa']=${{SECRET_TF_SA}}
+                      ENV_SCOPE['tf_sa']=${{$SECRET_TF_SA}}
                       export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
                       export K8S_SA=${ENV_SCOPE['k8s_sa']}
                       export TF_SA=${ENV_SCOPE['tf_sa']}
