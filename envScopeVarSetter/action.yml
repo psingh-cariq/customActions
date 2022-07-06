@@ -20,13 +20,13 @@ runs:
           ENV_NAME_KEY=${{ github.event.inputs.envName }}
           ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
           ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
-          if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
-          then
-            out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
-            projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
-          else
-            projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
-          fi
+          #if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
+          #then
+            #out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
+            #projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
+          #else
+            #projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
+          #fi
           echo "Project Id: $projectId"
           ENV_SCOPE['project_id']=$projectId
           ENV_SCOPE['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
@@ -37,9 +37,21 @@ runs:
           export TF_SA=${ENV_SCOPE['tf_sa']}
           echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
           
+          set_project_id() {
+            if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
+            then
+              out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
+              projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
+            else
+              projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
+            fi
+          }
+          
           case ${ENV_SCOPE_KEYS^^} in
           "PLAYPCI")
           echo "switch PLAYPCI"
+          set_project_id()
+          echo "Project Id: $projectId"
           ;;
           "PLAYNONPCI")
           echo "switch PLAYNONPCI"
