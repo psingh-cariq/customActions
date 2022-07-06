@@ -50,34 +50,6 @@ runs:
           ENV_SCOPE['k8s_sa']=${{${secret.SECRET_K8S_SA}}
           ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYNONPCI_TERRAFORM}}
           ;;
-#          "DEVPCI")
-#          echo "switch DEVPCI"
-#          set_env_project_id
-#          ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVPCI_DEPLOYMENT}}
-#          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVPCI_TERRAFORM}}
-#          ;;
-#          "DEVNONPCI")
-#          echo "switch DEVNONPCI"
-#          set_env_project_id
-#          ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_DEPLOYMENT}}
-#          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_TERRAFORM}}
-#          ;;
-#          "INTGPCI")
-#          echo "switch INTGPCI"
-#          set_env_project_id
-#          ;;
-#          "INTGNONPCI")
-#          echo "switch INTGNONPCI"
-#          set_env_project_id
-#          ;;
-#          "STAGINGPCI")
-#          echo "switch STAGINGPCI"
-#          set_env_project_id
-#          ;;
-#          "STAGINGNONPCI")
-#          echo "switch STAGINGNONPCI"
-#          set_env_project_id
-#          ;;
           *)
           echo "No matching information found"
           ;;
