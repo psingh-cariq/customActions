@@ -14,7 +14,6 @@ runs:
   steps:
       - name: Set secrets as env var
         shell: bash
-        environment: dev
         run: |
           set -x
           declare -A ENV_SCOPE
