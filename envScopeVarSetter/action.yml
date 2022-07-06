@@ -42,13 +42,13 @@ runs:
           "PLAYPCI")
             echo "switch PLAYPCI"
             set_env_project_id
-            ENV_SCOPE['k8s_sa']=${{secrets.SECRET_K8S_SA}}
+            ENV_SCOPE['k8s_sa']=${{secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT}}
             ENV_SCOPE['tf_sa']=${{secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM}}
             ;;
           "PLAYNONPCI")
             echo "switch PLAYNONPCI"
             set_env_project_id
-            ENV_SCOPE['k8s_sa']=${{secrets.SECRET_K8S_SA}}
+            ENV_SCOPE['k8s_sa']=${{secrets.GCP_SA_GHA_PLAYNONPCI_DEPLOYMENT}}
             ENV_SCOPE['tf_sa']=${{secrets.GCP_SA_GHA_PLAYNONPCI_TERRAFORM}}
             ;;
           *)
