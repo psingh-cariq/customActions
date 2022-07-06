@@ -27,7 +27,7 @@ runs:
           #else
             #projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
           #fi
-          echo "Project Id: $projectId"
+          #echo "Project Id: $projectId"
           ENV_SCOPE['project_id']=$projectId
           ENV_SCOPE['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
           ENV_SCOPE['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_TERRAFORM"
