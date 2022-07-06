@@ -16,74 +16,75 @@ runs:
         shell: bash
         run: |
           set -x
-                    declare -A ENV_SCOPE
-                    ENV_NAME_KEY=${{ github.event.inputs.envName }}
-                    ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
-                    ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
-                    ENV_KEYS_SWITCH=$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')
-                    echo  "switch $ENV_KEYS_SWITCH"
-                    echo "env scope keys $ENV_SCOPE_KEYS"
-                    PROJECT_ID
+          declare -A ENV_SCOPE
+          ENV_NAME_KEY=${{ github.event.inputs.envName }}
+          ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
+          ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
+          ENV_KEYS_SWITCH=$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')
+          echo "switch $ENV_KEYS_SWITCH"
+          echo "env scope keys $ENV_SCOPE_KEYS"
+          PROJECT_ID
 
 
-                    set_env_project_id(){
-                      if [[ $(echo "$ENV_SCOPE_KEY" | awk '{print toupper($0)}') == NON* ]]
-                      then
-                        out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
-                        PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$out" | awk '{print tolower($0)}')
-                      else
-                        PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$ENV_SCOPE_KEY" | awk '{print tolower($0)}'); fi
+          set_env_project_id(){
+            if [[ $(echo "$ENV_SCOPE_KEY" | awk '{print toupper($0)}') == NON* ]]
+            then
+              echo "in then
+              out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
+              PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$out" | awk '{print tolower($0)}')
+            else
+              echo "in else"
+              PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$ENV_SCOPE_KEY" | awk '{print tolower($0)}'); fi
+            ENV_SCOPE['project_id']=$PROJECT_ID
+          }
 
-                      ENV_SCOPE['project_id']=$PROJECT_ID
-                    }
-
-                    case $(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}') in
-                    "PLAYPCI")
-                    echo "switch PLAYPCI"
-                    set_env_project_id
-                    ENV_SCOPE['k8s_sa']=${{secret.SECRET_K8S_SA}}
-                    ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYPCI_TERRAFORM}}
-                    ;;
-                    "PLAYNONPCI")
-                    echo "switch PLAYNONPCI"
-                    set_env_project_id
-                    ENV_SCOPE['k8s_sa']=${{${secret.SECRET_K8S_SA}}
-                    ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYNONPCI_TERRAFORM}}
-                    ;;
-                    "DEVPCI")
-                    echo "switch DEVPCI"
-                    set_env_project_id
-                    ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVPCI_DEPLOYMENT}}
-                    ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVPCI_TERRAFORM}}
-                    ;;
-                    "DEVNONPCI")
-                    echo "switch DEVNONPCI"
-                    set_env_project_id
-                    ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_DEPLOYMENT}}
-                    ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_TERRAFORM}}
-                    ;;
-                    "INTGPCI")
-                    echo "switch INTGPCI"
-                    set_env_project_id
-                    ;;
-                    "INTGNONPCI")
-                    echo "switch INTGNONPCI"
-                    set_env_project_id
-                    ;;
-                    "STAGINGPCI")
-                    echo "switch STAGINGPCI"
-                    set_env_project_id
-                    ;;
-                    "STAGINGNONPCI")
-                    echo "switch STAGINGNONPCI"
-                    set_env_project_id
-                    ;;
-                    *)
-                    echo "No matching information found"
-                    set_env_project_id
-                    ;;
-                    esac
-                    echo "PROJECT_ID id after switch: ${PROJECT_ID}"
-                    export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
-                    export K8S_SA=${ENV_SCOPE['k8s_sa']}
-                    export TF_SA=${ENV_SCOPE['tf_sa']}
+          case $(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}') in
+          "PLAYPCI")
+          echo "switch PLAYPCI"
+          set_env_project_id
+          ENV_SCOPE['k8s_sa']=${{secret.SECRET_K8S_SA}}
+          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYPCI_TERRAFORM}}
+          ;;
+          "PLAYNONPCI")
+          echo "switch PLAYNONPCI"
+          set_env_project_id
+          ENV_SCOPE['k8s_sa']=${{${secret.SECRET_K8S_SA}}
+          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYNONPCI_TERRAFORM}}
+          ;;
+          "DEVPCI")
+          echo "switch DEVPCI"
+          set_env_project_id
+          ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVPCI_DEPLOYMENT}}
+          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVPCI_TERRAFORM}}
+          ;;
+          "DEVNONPCI")
+          echo "switch DEVNONPCI"
+          set_env_project_id
+          ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_DEPLOYMENT}}
+          ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_DEVNONPCI_TERRAFORM}}
+          ;;
+          "INTGPCI")
+          echo "switch INTGPCI"
+          set_env_project_id
+          ;;
+          "INTGNONPCI")
+          echo "switch INTGNONPCI"
+          set_env_project_id
+          ;;
+          "STAGINGPCI")
+          echo "switch STAGINGPCI"
+          set_env_project_id
+          ;;
+          "STAGINGNONPCI")
+          echo "switch STAGINGNONPCI"
+          set_env_project_id
+          ;;
+          *)
+          echo "No matching information found"
+          set_env_project_id
+          ;;
+          esac
+          echo "PROJECT_ID id after switch: ${PROJECT_ID}"
+          export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
+          export K8S_SA=${ENV_SCOPE['k8s_sa']}
+          export TF_SA=${ENV_SCOPE['tf_sa']}
