@@ -16,66 +16,71 @@ runs:
         shell: bash
         run: |
           set -x
-          declare -A ENV_SCOPE
-          ENV_NAME_KEY=${{ github.event.inputs.envName }}
-          ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
-          ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
-          #if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
-          #then
-            #out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
-            #projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
-          #else
-            #projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
-          #fi
-          #echo "Project Id: $projectId"
-          ENV_SCOPE['project_id']=$projectId
-          ENV_SCOPE['k8s_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_DEPLOYMENT"
-          ENV_SCOPE['tf_sa']="secret.GCP_SA_GHA_${ENV_SCOPE_KEYS^^}_TERRAFORM"
+                    declare -A ENV_SCOPE
+                    ENV_NAME_KEY=${{ github.event.inputs.envName }}
+                    ENV_SCOPE_KEY=${{ github.event.inputs.envScope }}
+                    ENV_SCOPE_KEYS=$ENV_NAME_KEY$ENV_SCOPE_KEY
+                    ENV_KEYS_SWITCH=$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')
+                    echo  "switch $ENV_KEYS_SWITCH"
+                    echo "env scope keys $ENV_SCOPE_KEYS"
+                    PROJECT_ID
 
-          export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
-          export K8S_SA=${ENV_SCOPE['k8s_sa']}
-          export TF_SA=${ENV_SCOPE['tf_sa']}
-          echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
-          
-          set_project_id() {
-            echo "in function"
-            if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
-            then
-              out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
-              projectId=(echo ${ENV_NAME_KEY,,}-${out,,})
-            else
-              projectId="${ENV_NAME_KEY,,}-${ENV_SCOPE_KEY,,}"
-            fi
-          }
-          
-          case ${ENV_SCOPE_KEYS^^} in
-          "PLAYPCI")
-          echo "switch PLAYPCI"
-          set_project_id()
-          echo "Project Id: $projectId"
-          ;;
-          "PLAYNONPCI")
-          echo "switch PLAYNONPCI"
-          ;;
-          "DEVPCI")
-          echo "switch DEVPCI"
-          ;;
-          "DEVNONPCI")
-          echo "switch DEVNONEPCI"
-          ;;
-          "INTGPCI")
-          echo "switch INTGPCI"
-          ;;
-          "INTGNONPCI")
-          echo "switch INTGNONPCI"
-          ;;
-          "STAGINGPCI")
-          echo "switch STAGINGPCI"
-          ;;
-          "STAGINGNONPCI")
-          echo "switch STAGINGNONPCI"
-          ;;
-          *)
-          echo "No matching information found"
-          ;;
-          esac
+
+                    set_env_scopes(){
+                      if [[ $(echo "$ENV_SCOPE_KEY" | awk '{print toupper($0)}') == NON* ]]
+                      then
+                        out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
+                        PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$out" | awk '{print tolower($0)}')
+                      else
+                        PROJECT_ID=$(echo "$ENV_NAME_KEY" | awk '{print tolower($0)}')-$(echo "$ENV_SCOPE_KEY" | awk '{print tolower($0)}'); fi
+
+                      ENV_SCOPE['project_id']=$PROJECT_ID
+                      SECRET_K8S_SA="secret.GCP_SA_GHA_$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')_DEPLOYMENT"
+                      ENV_SCOPE['k8s_sa']=${{SECRET_K8S_SA}}
+                      SECRET_TF_SA="secret.GCP_SA_GHA_$(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}')_TERRAFORM"
+                      ENV_SCOPE['tf_sa']=${{SECRET_TF_SA}}
+                      export GCP_PROJECT_ID=${ENV_SCOPE['project_id']}
+                      export K8S_SA=${ENV_SCOPE['k8s_sa']}
+                      export TF_SA=${ENV_SCOPE['tf_sa']}
+
+                    }
+
+                    case $(echo "$ENV_SCOPE_KEYS" | awk '{print toupper($0)}') in
+                    "PLAYPCI")
+                    echo "switch PLAYPCI"
+                    set_env_scopes
+                    ;;
+                    "PLAYNONPCI")
+                    echo "switch PLAYNONPCI"
+                    set_env_scopes
+                    ;;
+                    "DEVPCI")
+                    echo "switch DEVPCI"
+                    set_env_scopes
+                    ;;
+                    "DEVNONPCI")
+                    echo "switch DEVNONPCI"
+                    set_env_scopes
+                    ;;
+                    "INTGPCI")
+                    echo "switch INTGPCI"
+                    set_env_scopes
+                    ;;
+                    "INTGNONPCI")
+                    echo "switch INTGNONPCI"
+                    set_env_scopes
+                    ;;
+                    "STAGINGPCI")
+                    echo "switch STAGINGPCI"
+                    set_env_scopes
+                    ;;
+                    "STAGINGNONPCI")
+                    echo "switch STAGINGNONPCI"
+                    set_env_scopes
+                    ;;
+                    *)
+                    echo "No matching information found"
+                    set_env_scopes
+                    ;;
+                    esac
+                    echo "PROJECT_ID id after switch: ${PROJECT_ID}"
