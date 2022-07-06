@@ -7,5 +7,5 @@ runs:
         shell: bash
         run: |
           set -x
-          ${{secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT}}
-          ${{secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM}}
+          ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
+          ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
