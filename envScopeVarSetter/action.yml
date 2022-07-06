@@ -47,7 +47,7 @@ runs:
                     "PLAYNONPCI")
                     echo "switch PLAYNONPCI"
                     set_env_project_id
-                    ENV_SCOPE['k8s_sa']=${{secret.GCP_SA_GHA_PLAYNONPCI_DEPLOYMENT}}
+                    ENV_SCOPE['k8s_sa']=${{${secret.SECRET_K8S_SA}}
                     ENV_SCOPE['tf_sa']=${{secret.GCP_SA_GHA_PLAYNONPCI_TERRAFORM}}
                     ;;
                     "DEVPCI")
