@@ -47,7 +47,7 @@ runs:
           "DEVPCI")
           echo "switch DEVPCI"
           ;;
-          "DEVNONEPCI")
+          "DEVNONPCI")
           echo "switch DEVNONEPCI"
           ;;
           "INTGPCI")
