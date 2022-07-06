@@ -1,13 +1,4 @@
 name: "Env and Scope Var Setter"
-description: "Sets secrets bases on env and scope"
-
-inputs:
-      envName:
-        description: 'Environment name'
-        required: true
-      envScope:
-        description: 'Environment scope'
-        required: true
 
 runs:
   using: "composite"
@@ -16,7 +7,5 @@ runs:
         shell: bash
         run: |
           set -x
-          k8s="${{secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT}}"
-          tf="${{secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM}}"
-          echo "k8s=$k8s"
-          echo "tf=$tf"
+          ${{secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT}}
+          ${{secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM}}
