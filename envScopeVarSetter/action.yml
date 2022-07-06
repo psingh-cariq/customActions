@@ -38,6 +38,7 @@ runs:
           echo "${GCP_PROJECT_ID} ${K8S_SA} ${TF_SA}"
           
           set_project_id() {
+            echo "in function"
             if [[ ${ENV_SCOPE_KEY^^} == "NON*" ]]
             then
               out=$(echo $ENV_SCOPE_KEY | sed 's/./&-/3')
