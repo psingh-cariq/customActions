@@ -13,6 +13,6 @@ runs:
           echo "${{env.GCP_SA_GHA_PLAYPCI_TERRAFORM}}"
         env:
           env1: foobar
-          GCP_SA_GHA_PLAYPCI_DEPLOYMENT: ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
-          GCP_SA_GHA_PLAYPCI_TERRAFORM: ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
+#          GCP_SA_GHA_PLAYPCI_DEPLOYMENT: ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
+#          GCP_SA_GHA_PLAYPCI_TERRAFORM: ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
           
