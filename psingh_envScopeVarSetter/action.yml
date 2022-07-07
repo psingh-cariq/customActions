@@ -12,7 +12,5 @@ runs:
           echo "tf=$tf"
         env:
           env1: foobar
-        secrets:
           k8s: ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
-          tf: ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
           
