@@ -8,11 +8,10 @@ runs:
         run: |
           set -x
           echo "env1: $env1"
-          #echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
-          echo "${{env.GCP_SA_GHA_PLAYPCI_DEPLOYMENT}}"
-          echo "${{env.GCP_SA_GHA_PLAYPCI_TERRAFORM}}"
+          echo "k8s=$k8s"
+          echo "tf=$tf"
         env:
           env1: foobar
-#          GCP_SA_GHA_PLAYPCI_DEPLOYMENT: ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
-#          GCP_SA_GHA_PLAYPCI_TERRAFORM: ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
+          k8s: ${{ secrets.GCP_SA_GHA_PLAYPCI_DEPLOYMENT }}
+          tf: ${{ secrets.GCP_SA_GHA_PLAYPCI_TERRAFORM }}
           
