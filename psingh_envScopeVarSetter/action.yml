@@ -1,4 +1,4 @@
-name: "psingh - Env and Scope Var Setter"
+name: "psingh- Env and Scope Var Setter"
 
 runs:
   using: "composite"
