@@ -16,4 +16,5 @@
     token: yourToken
     repoName: repo name
     gitSha: git sha to be deployed
+    envName: name of env
 ```
