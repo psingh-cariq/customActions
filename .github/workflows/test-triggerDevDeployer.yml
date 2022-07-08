@@ -11,10 +11,10 @@ on:
         description: 'Git Sha to deploy'
         required: true
         default: '1234567'
-      deployerName:
-        description: "name of the yaml workflow file"
+      envName:
+        description: "Prefix of Deployer.yaml with env name"
         required: true
-        default: 'dev-pci'
+        default: 'dev'
 
 env:
   GIT_SHA: ${{ github.event.inputs.target-env }}
