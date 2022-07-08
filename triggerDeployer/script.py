@@ -4,8 +4,8 @@ import os
 import requests
 
 
-def trigger_workflow(auth_token, git_sha, repo_name, deployer_name):
-    dispatch_url = "https://api.github.com/repos/gocariq/devops/actions/workflows/{}.yaml/dispatches".format(deployer_name)
+def trigger_workflow(auth_token, git_sha, repo_name, env):
+    dispatch_url = "https://api.github.com/repos/gocariq/devops/actions/workflows/{}Deployer.yaml/dispatches".format(env)
     payload = json.dumps({
         "ref": "main",
         "inputs": {
@@ -26,8 +26,8 @@ def main():
     auth_token = os.environ['INPUT_TOKEN']
     repo_name = os.environ['INPUT_REPONAME']
     git_sha = os.environ['INPUT_GITSHA']
-    deployer_name = os.environ['INPUT_DEPLOYERNAME']
-    trigger_workflow(auth_token, git_sha, repo_name, deployer_name)
+    env = os.environ['INPUT_ENVNAME']
+    trigger_workflow(auth_token, git_sha, repo_name, env)
 
 
 if __name__ == '__main__':

@@ -10,9 +10,9 @@ inputs:
   gitSha:
     required: true
     description: GitHub Sha
-  deployerName:
+  envName:
     required: true
-    description: Name of the yaml workflow file in devops repo
+    description: Env name it will prefix the Deployer.yaml file, devDeployer.yaml for example
 
 runs:
   using: docker
