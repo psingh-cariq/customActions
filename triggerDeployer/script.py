@@ -24,7 +24,7 @@ def trigger_workflow(auth_token, git_sha, repo_name, env):
 
 
 def main():
-    auth_token = os.environ['INPUT_TOKEN'].replace(" ", "").lower()
+    auth_token = os.environ['INPUT_TOKEN']
     repo_name = os.environ['INPUT_REPONAME'].replace(" ", "").lower()
     print("Requested Repo name: {}".format(repo_name))
     git_sha = os.environ['INPUT_GITSHA'].replace(" ", "").lower()
