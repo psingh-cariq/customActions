@@ -31,4 +31,4 @@ jobs:
          token: ${{secrets.DISPATCH_ACCESS_TOKEN}}
          gitSha: ${{ github.event.inputs.gitSha }}
          repoName: ${{ github.event.inputs.repoName }}
-         deployerName: ${{ github.event.inputs.deployerName }}
+         envName: ${{ github.event.inputs.deployerName }}
