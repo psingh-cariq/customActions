@@ -45,10 +45,9 @@ runs:
         shell: bash
         run: |
           set -x
+          gcloud config set project ${{inputs.google_project_id}}
           gcloud auth list
-          gcloud config set project ${{inputs.google_project_id}}
           gcloud config set compute/region ${{inputs.k8s_cluster_region}}
-          gcloud config set project ${{inputs.google_project_id}}
           gcloud container clusters get-credentials ${{inputs.k8s_cluster_name}}
       - name: perform k8s deployment
         shell: bash
