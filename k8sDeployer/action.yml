@@ -46,6 +46,7 @@
           run: |
             set -x
             sudo yum install google-cloud-sdk-gke-gcloud-auth-plugin
+            gcloud config set project ${{inputs.google_project_id}}
             gcloud auth list 
             gcloud config set compute/region ${{inputs.k8s_cluster_region}}
             gcloud config set project ${{inputs.google_project_id}}
