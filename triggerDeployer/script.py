@@ -12,6 +12,7 @@ def trigger_workflow(auth_token, git_sha, repo_name, env):
         "inputs": {
             "gitSha": "{}".format(git_sha),
             "gitRepo": "{}".format(repo_name),
+            "envName": "{}".format(env)
         }
     })
     headers = {
