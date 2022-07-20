@@ -5,7 +5,7 @@ import requests
 
 
 def trigger_workflow(auth_token, git_sha, repo_name, env):
-    dispatch_url = "https://api.github.com/repos/gocariq/devops/actions/workflows/deployer.yaml/dispatches"
+    dispatch_url = "https://api.github.com/repos/gocariq/devops/actions/workflows/devDeployer.yaml/dispatches"
     print(dispatch_url)
     payload = json.dumps({
         "ref": "main",
