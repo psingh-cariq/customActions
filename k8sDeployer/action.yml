@@ -31,7 +31,6 @@
           with:
             project_id: ${{inputs.google_project_id}}
             service_account_key: ${{inputs.google_credentials}}
-            use_auth_provider: true
         - uses: danielr1996/envsubst-action@1.0.0
           env:
             CQ_APP_NAME: ${{inputs.CQ_APP_NAME}}
