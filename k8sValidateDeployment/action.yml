@@ -1,5 +1,5 @@
-name: "Deploy to Kubernetes"
-description: "Authenticate and Deploy to Google Kubernetes Engine"
+name: "Validate Deployment"
+description: "Authenticate and Validate Deployent"
 
 inputs:
   google_credentials:
@@ -32,7 +32,7 @@ runs:
   steps:
       - uses: actions/checkout@v2
       - name: gcp auth
-        uses: google-github-actions/setup-gcloud@v0.2.0
+        uses: google-github-actions/setup-gcloud@v0.5.0
         with:
           project_id: ${{inputs.google_project_id}}
           service_account_key: ${{inputs.google_credentials}}
