@@ -2,18 +2,18 @@ name: "Validate Deployment"
 description: "Authenticate and Validate Deployent"
 
 inputs:
-  google_credentials:
-    description: "Google Credentials"
-    required: true
-  google_project_id:
-    description: "Google Project Id"
-    required: true
-  k8s_cluster_name:
-    description: "K8s cluster name"
-    required: true
-  k8s_cluster_region:
-    description: "K8s cluster region"
-    required: true
+#  google_credentials:
+#    description: "Google Credentials"
+#    required: true
+#  google_project_id:
+#    description: "Google Project Id"
+#    required: true
+#  k8s_cluster_name:
+#    description: "K8s cluster name"
+#    required: true
+#  k8s_cluster_region:
+#    description: "K8s cluster region"
+#    required: true
   app_name:
     description: "name of the service"
     required: true
@@ -30,19 +30,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-      - uses: actions/checkout@v2
-      - name: gcp auth
-        uses: google-github-actions/setup-gcloud@v0.5.0
-        with:
-          project_id: ${{inputs.google_project_id}}
-          service_account_key: ${{inputs.google_credentials}}
-      - name: Configure for K8s cluster
-        shell: bash
-        run: |
-          gcloud auth list 
-          gcloud config set compute/region ${{inputs.k8s_cluster_region}}
-          gcloud config set project ${{inputs.google_project_id}}
-          gcloud container clusters get-credentials ${{inputs.k8s_cluster_name}}
       - name: perform deployment validation
         shell: bash
         run: |
