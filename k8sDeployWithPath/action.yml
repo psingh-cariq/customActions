@@ -23,17 +23,19 @@ runs:
   steps:
       - uses: actions/checkout@v2
       - name: gcp auth
-        uses: google-github-actions/setup-gcloud@v0.2.0
+        uses: google-github-actions/setup-gcloud@v0.5.0
         with:
           project_id: ${{inputs.google_project_id}}
           service_account_key: ${{inputs.google_credentials}}
       - name: Configure for K8s cluster
         shell: bash
         run: |
-          gcloud auth list 
-          gcloud config set compute/region ${{inputs.k8s_cluster_region}}
-          gcloud config set project ${{inputs.google_project_id}}
-          gcloud container clusters get-credentials ${{inputs.k8s_cluster_name}}
+            set -x
+            gcloud config set project ${{inputs.google_project_id}}
+            gcloud auth list 
+            gcloud config set compute/region ${{inputs.k8s_cluster_region}}
+            gcloud config set project ${{inputs.google_project_id}}
+            gcloud container clusters get-credentials ${{inputs.k8s_cluster_name}}
       - name: perform k8s deployment
         shell: bash
         run: |
