@@ -53,7 +53,7 @@ runs:
           docker images
           
           cd ${{inputs.docker_file_path}}
-          docker build -t "$IMAGE1" -t "$IMAGE2" .
+          DOCKER_BUILDKIT=1 docker build -t "$IMAGE1" -t "$IMAGE2" .
           cd -
           docker images
 
